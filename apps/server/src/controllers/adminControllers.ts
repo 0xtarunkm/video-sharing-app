@@ -123,22 +123,6 @@ export const addVideo = async (req: Request, res: Response) => {
   }
 };
 
-export const getVideo = async (req: Request, res: Response) => {
-  try {
-    const video = await prisma.video.findUnique({
-      where: { id: req.params.id },
-    });
-
-    if (!video) {
-      return res.status(404).json({ msg: 'Video not found' });
-    }
-
-    res.status(200).json({ video });
-  } catch (error: any) {
-    res.status(500).json({ msg: error.message });
-  }
-};
-
 export const updateVideo = async (req: Request, res: Response) => {
   try {
     const parsedInput = VideoInput.safeParse(req.body);
