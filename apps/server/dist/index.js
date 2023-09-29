@@ -18171,17 +18171,17 @@ var require_router = __commonJS({
     var toString = Object.prototype.toString;
     var proto = module2.exports = function(options) {
       var opts = options || {};
-      function router2(req, res, next) {
-        router2.handle(req, res, next);
+      function router4(req, res, next) {
+        router4.handle(req, res, next);
       }
-      setPrototypeOf(router2, proto);
-      router2.params = {};
-      router2._params = [];
-      router2.caseSensitive = opts.caseSensitive;
-      router2.mergeParams = opts.mergeParams;
-      router2.strict = opts.strict;
-      router2.stack = [];
-      return router2;
+      setPrototypeOf(router4, proto);
+      router4.params = {};
+      router4._params = [];
+      router4.caseSensitive = opts.caseSensitive;
+      router4.mergeParams = opts.mergeParams;
+      router4.strict = opts.strict;
+      router4.stack = [];
+      return router4;
     };
     proto.param = function param(name, fn2) {
       if (typeof name === "function") {
@@ -21301,17 +21301,17 @@ var require_application = __commonJS({
       }
     };
     app2.handle = function handle(req, res, callback) {
-      var router2 = this._router;
+      var router4 = this._router;
       var done = callback || finalhandler(req, res, {
         env: this.get("env"),
         onerror: logerror.bind(this)
       });
-      if (!router2) {
+      if (!router4) {
         debug("no routes defined on app");
         done();
         return;
       }
-      router2.handle(req, res, done);
+      router4.handle(req, res, done);
     };
     app2.use = function use(fn2) {
       var offset = 0;
@@ -21331,15 +21331,15 @@ var require_application = __commonJS({
         throw new TypeError("app.use() requires a middleware function");
       }
       this.lazyrouter();
-      var router2 = this._router;
+      var router4 = this._router;
       fns.forEach(function(fn3) {
         if (!fn3 || !fn3.handle || !fn3.set) {
-          return router2.use(path, fn3);
+          return router4.use(path, fn3);
         }
         debug(".use app under %s", path);
         fn3.mountpath = path;
         fn3.parent = this;
-        router2.use(path, function mounted_app(req, res, next) {
+        router4.use(path, function mounted_app(req, res, next) {
           var orig = req.app;
           fn3.handle(req, res, function(err) {
             setPrototypeOf(req, orig.request);
@@ -29719,7 +29719,7 @@ var require_bcrypt = __commonJS({
         (global2["dcodeIO"] = global2["dcodeIO"] || {})["bcrypt"] = factory();
     })(exports2, function() {
       "use strict";
-      var bcrypt2 = {};
+      var bcrypt3 = {};
       var randomFallback = null;
       function random(len) {
         if (typeof module2 !== "undefined" && module2 && module2["exports"])
@@ -29744,10 +29744,10 @@ var require_bcrypt = __commonJS({
       } catch (e) {
       }
       randomFallback = null;
-      bcrypt2.setRandomFallback = function(random2) {
+      bcrypt3.setRandomFallback = function(random2) {
         randomFallback = random2;
       };
-      bcrypt2.genSaltSync = function(rounds, seed_length) {
+      bcrypt3.genSaltSync = function(rounds, seed_length) {
         rounds = rounds || GENSALT_DEFAULT_LOG2_ROUNDS;
         if (typeof rounds !== "number")
           throw Error("Illegal arguments: " + typeof rounds + ", " + typeof seed_length);
@@ -29764,7 +29764,7 @@ var require_bcrypt = __commonJS({
         salt.push(base64_encode(random(BCRYPT_SALT_LEN), BCRYPT_SALT_LEN));
         return salt.join("");
       };
-      bcrypt2.genSalt = function(rounds, seed_length, callback) {
+      bcrypt3.genSalt = function(rounds, seed_length, callback) {
         if (typeof seed_length === "function")
           callback = seed_length, seed_length = void 0;
         if (typeof rounds === "function")
@@ -29776,7 +29776,7 @@ var require_bcrypt = __commonJS({
         function _async(callback2) {
           nextTick(function() {
             try {
-              callback2(null, bcrypt2.genSaltSync(rounds));
+              callback2(null, bcrypt3.genSaltSync(rounds));
             } catch (err) {
               callback2(err);
             }
@@ -29797,19 +29797,19 @@ var require_bcrypt = __commonJS({
             });
           });
       };
-      bcrypt2.hashSync = function(s, salt) {
+      bcrypt3.hashSync = function(s, salt) {
         if (typeof salt === "undefined")
           salt = GENSALT_DEFAULT_LOG2_ROUNDS;
         if (typeof salt === "number")
-          salt = bcrypt2.genSaltSync(salt);
+          salt = bcrypt3.genSaltSync(salt);
         if (typeof s !== "string" || typeof salt !== "string")
           throw Error("Illegal arguments: " + typeof s + ", " + typeof salt);
         return _hash(s, salt);
       };
-      bcrypt2.hash = function(s, salt, callback, progressCallback) {
+      bcrypt3.hash = function(s, salt, callback, progressCallback) {
         function _async(callback2) {
           if (typeof s === "string" && typeof salt === "number")
-            bcrypt2.genSalt(salt, function(err, salt2) {
+            bcrypt3.genSalt(salt, function(err, salt2) {
               _hash(s, salt2, callback2, progressCallback);
             });
           else if (typeof s === "string" && typeof salt === "string")
@@ -29844,14 +29844,14 @@ var require_bcrypt = __commonJS({
           return false;
         return wrong === 0;
       }
-      bcrypt2.compareSync = function(s, hash) {
+      bcrypt3.compareSync = function(s, hash) {
         if (typeof s !== "string" || typeof hash !== "string")
           throw Error("Illegal arguments: " + typeof s + ", " + typeof hash);
         if (hash.length !== 60)
           return false;
-        return safeStringCompare(bcrypt2.hashSync(s, hash.substr(0, hash.length - 31)), hash);
+        return safeStringCompare(bcrypt3.hashSync(s, hash.substr(0, hash.length - 31)), hash);
       };
-      bcrypt2.compare = function(s, hash, callback, progressCallback) {
+      bcrypt3.compare = function(s, hash, callback, progressCallback) {
         function _async(callback2) {
           if (typeof s !== "string" || typeof hash !== "string") {
             nextTick(callback2.bind(this, Error("Illegal arguments: " + typeof s + ", " + typeof hash)));
@@ -29861,7 +29861,7 @@ var require_bcrypt = __commonJS({
             nextTick(callback2.bind(this, null, false));
             return;
           }
-          bcrypt2.hash(s, hash.substr(0, 29), function(err, comp) {
+          bcrypt3.hash(s, hash.substr(0, 29), function(err, comp) {
             if (err)
               callback2(err);
             else
@@ -29883,12 +29883,12 @@ var require_bcrypt = __commonJS({
             });
           });
       };
-      bcrypt2.getRounds = function(hash) {
+      bcrypt3.getRounds = function(hash) {
         if (typeof hash !== "string")
           throw Error("Illegal arguments: " + typeof hash);
         return parseInt(hash.split("$")[2], 10);
       };
-      bcrypt2.getSalt = function(hash) {
+      bcrypt3.getSalt = function(hash) {
         if (typeof hash !== "string")
           throw Error("Illegal arguments: " + typeof hash);
         if (hash.length !== 60)
@@ -31514,9 +31514,9 @@ var require_bcrypt = __commonJS({
           }, progressCallback);
         }
       }
-      bcrypt2.encodeBase64 = base64_encode;
-      bcrypt2.decodeBase64 = base64_decode;
-      return bcrypt2;
+      bcrypt3.encodeBase64 = base64_encode;
+      bcrypt3.decodeBase64 = base64_decode;
+      return bcrypt3;
     });
   }
 });
@@ -32218,9 +32218,9 @@ var require_jws = __commonJS({
 var require_decode = __commonJS({
   "../../node_modules/jsonwebtoken/decode.js"(exports2, module2) {
     var jws = require_jws();
-    module2.exports = function(jwt3, options) {
+    module2.exports = function(jwt4, options) {
       options = options || {};
-      var decoded = jws.decode(jwt3, options);
+      var decoded = jws.decode(jwt4, options);
       if (!decoded) {
         return null;
       }
@@ -35705,14 +35705,14 @@ var require_jsonwebtoken = __commonJS({
 });
 
 // src/index.ts
-var import_express2 = __toESM(require_express2());
+var import_express4 = __toESM(require_express2());
 var import_dotenv = __toESM(require_main());
 var import_cors = __toESM(require_lib3());
 
 // src/routes/adminRoutes.ts
 var import_express = __toESM(require_express2());
 
-// ../../packages/common/node_modules/zod/lib/index.mjs
+// ../../node_modules/zod/lib/index.mjs
 var util;
 (function(util2) {
   util2.assertEqual = (val) => val;
@@ -39569,11 +39569,244 @@ router.post("/login", login);
 router.route("/profile").get(protectAdmin, getAdminProfile).put(protectAdmin, updateAdminProfile);
 var adminRoutes_default = router;
 
+// src/routes/userRoutes.ts
+var import_express2 = __toESM(require_express2());
+
+// src/controllers/userControllers.ts
+var import_bcryptjs2 = __toESM(require_bcryptjs());
+var register2 = async (req, res) => {
+  try {
+    const parsedInput = SignupInput.safeParse(req.body);
+    if (!parsedInput.success) {
+      return res.status(400).json({ msg: parsedInput.error });
+    }
+    const { name, email, password } = parsedInput.data;
+    const salt = await import_bcryptjs2.default.genSalt(10);
+    const hashedPassword = await import_bcryptjs2.default.hash(password, salt);
+    const user = await prisma.user.create({
+      data: { name, email, password: hashedPassword }
+    });
+    res.status(201).json({ msg: "Admin created successfully", user });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var login2 = async (req, res) => {
+  try {
+    const parsedInput = SignupInput.safeParse(req.body);
+    if (!parsedInput.success) {
+      return res.status(400).json({ msg: parsedInput.error });
+    }
+    const { email, password } = parsedInput.data;
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+    const isMatch = await import_bcryptjs2.default.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
+    const token = generateToken(user.id);
+    res.status(200).json({ msg: "User logged in successfully", token });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var getUserProfile = async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.userId },
+      select: { id: true, name: true, email: true }
+    });
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var updateUserProfile = async (req, res) => {
+  try {
+    const parsedInput = SignupInput.safeParse(req.body);
+    if (!parsedInput.success) {
+      return res.status(400).json({ msg: parsedInput.error });
+    }
+    const { name, email, password } = parsedInput.data;
+    const user = await prisma.user.update({
+      where: { id: req.userId },
+      data: { name, email, password }
+    });
+    res.status(200).json({ msg: "User updated successfully", user });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+// src/middlewares/protectUser.ts
+var import_jsonwebtoken3 = __toESM(require_jsonwebtoken());
+var protectUser = (req, res, next) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    if (!token) {
+      return res.status(401).json({ msg: "Not authorized, no token" });
+    }
+    const decoded = import_jsonwebtoken3.default.verify(token, process.env.JWT_SECRET);
+    req.userId = decoded.id;
+    next();
+  } catch (error) {
+    res.status(401).json({ msg: "Not authorized, token failed" });
+  }
+};
+
+// src/routes/userRoutes.ts
+var router2 = import_express2.default.Router();
+router2.post("/register", register2);
+router2.post("/login", login2);
+router2.route("/profile").get(protectUser, getUserProfile).put(protectUser, updateUserProfile);
+var userRoutes_default = router2;
+
+// src/routes/videoRoutes.ts
+var import_express3 = __toESM(require_express2());
+
+// src/controllers/videoControllers.ts
+var getVideo = async (req, res) => {
+  try {
+    const video = await prisma.video.findUnique({
+      where: { id: req.params.id }
+    });
+    if (!video) {
+      return res.status(404).json({ msg: "Video not found" });
+    }
+    res.status(200).json({ video });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var getAllVideos = async (req, res) => {
+  try {
+    const videos = await prisma.video.findMany({
+      orderBy: { createdAt: "desc" }
+    });
+    res.status(200).json({ videos });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var likeVideo = async (req, res) => {
+  try {
+    const video = await prisma.video.findUnique({
+      where: { id: req.params.id }
+    });
+    if (!video) {
+      return res.status(404).json({ msg: "Video not found" });
+    }
+    const like = await prisma.like.findFirst({
+      where: {
+        videoId: req.params.id,
+        userId: req.userId
+      }
+    });
+    if (like) {
+      await prisma.like.delete({ where: { id: like.id } });
+    } else {
+      await prisma.like.create({
+        data: {
+          video: { connect: { id: req.params.id } },
+          user: { connect: { id: req.userId } }
+        }
+      });
+    }
+    res.status(200).json({ msg: "Video liked successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var getVideoLikes = async (req, res) => {
+  try {
+    const video = await prisma.video.findUnique({
+      where: { id: req.params.id }
+    });
+    if (!video) {
+      return res.status(404).json({ msg: "Video not found" });
+    }
+    const likes = await prisma.like.findMany({
+      where: { videoId: req.params.id },
+      select: { user: { select: { id: true, name: true } } }
+    });
+    res.status(200).json({ likes });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var commentVideo = async (req, res) => {
+  try {
+    const video = await prisma.video.findUnique({
+      where: { id: req.params.id }
+    });
+    if (!video) {
+      return res.status(404).json({ msg: "Video not found" });
+    }
+    const comment = await prisma.comment.create({
+      data: {
+        text: req.body.text,
+        video: { connect: { id: req.params.id } },
+        user: { connect: { id: req.userId } }
+      }
+    });
+    res.status(201).json({ msg: "Comment created successfully", comment });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var getAllComments = async (req, res) => {
+  try {
+    const video = await prisma.video.findUnique({
+      where: { id: req.params.id }
+    });
+    if (!video) {
+      return res.status(404).json({ msg: "Video not found" });
+    }
+    const comments = await prisma.comment.findMany({
+      where: { videoId: req.params.id },
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        text: true,
+        createdAt: true,
+        user: { select: { id: true, name: true } }
+      }
+    });
+    res.status(200).json({ comments });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+var deleteComment = async (req, res) => {
+  try {
+    const comment = await prisma.comment.findUnique({
+      where: { id: req.params.id }
+    });
+    if (!comment) {
+      return res.status(404).json({ msg: "Comment not found" });
+    }
+    await prisma.comment.delete({ where: { id: req.params.id } });
+    res.status(200).json({ msg: "Comment deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+// src/routes/videoRoutes.ts
+var router3 = import_express3.default.Router();
+router3.get("/:id", protectUser, getVideo);
+router3.get("/", protectUser, getAllVideos);
+router3.route("/like/:id").get(protectUser, getVideoLikes).post(protectUser, likeVideo);
+router3.route("/comment/:id").post(protectUser, commentVideo).get(protectUser, getAllComments).delete(protectUser, deleteComment);
+var videoRoutes_default = router3;
+
 // src/index.ts
 import_dotenv.default.config();
-var app = (0, import_express2.default)();
-app.use(import_express2.default.json());
-app.use(import_express2.default.urlencoded({ extended: true }));
+var app = (0, import_express4.default)();
+app.use(import_express4.default.json());
+app.use(import_express4.default.urlencoded({ extended: true }));
 app.use(
   (0, import_cors.default)({
     origin: [process.env.CLIENT_URL, process.env.ADMIN_URL],
@@ -39581,6 +39814,8 @@ app.use(
   })
 );
 app.use("/api/admin", adminRoutes_default);
+app.use("/api/user", userRoutes_default);
+app.use("/api/video", videoRoutes_default);
 var PORT = process.env.PORT || 8e3;
 app.listen(PORT, () => {
   console.log(`Server is running in http://localhost:${PORT}`);
