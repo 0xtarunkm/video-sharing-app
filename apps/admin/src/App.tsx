@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'store';
+import Home from './components/Home';
 
 const BASE_URL = 'http://localhost:8000/api';
 
@@ -21,6 +22,7 @@ function App() {
     });
 
     setUser({
+      userName: res.data.admin.name,
       userEmail: res.data.admin.email,
       isLoading: false,
     });
@@ -69,11 +71,12 @@ function App() {
 
                 toast.success('Logged in successfully');
                 navigate('/');
+                window.location.reload();
               }}
             />
           }
         />
-        <Route path="/" element={<div>Home</div>} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </>
   );

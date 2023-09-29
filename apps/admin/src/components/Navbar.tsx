@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { userEmailState } from 'store';
+import { userEmailState, userNameState } from 'store';
 import toast from 'react-hot-toast';
 
 const navlinks = [
@@ -15,8 +15,8 @@ const navlinks = [
 ];
 
 export default function Navbar() {
+  const userName = useRecoilValue(userNameState);
   const userEmail = useRecoilValue(userEmailState);
-  console.log(userEmail);
 
   const navigate = useNavigate();
 
@@ -29,27 +29,14 @@ export default function Navbar() {
         </Link>
       </section>
 
-      {userEmail && (
-        <div>
-          <ul className="flex items-center font-bold">
-            {navlinks.map((link) => (
-              <li key={link.title}>
-                <Link
-                  to={link.path}
-                  className="px-4 py-2 text-gray-600 hover:text-gray-900 hover:underline duration-200"
-                >
-                  {link.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
       {/* right section */}
       <section>
         {userEmail ? (
-          <div>
+          <div className="flex items-center space-x-3">
+            <div>
+              <span className="text-gray-600 text-sm">Welcome </span>
+              <span className="text-gray-600 font-semibold">{userName}</span>
+            </div>
             <button
               className="btn"
               onClick={() => {
@@ -57,6 +44,7 @@ export default function Navbar() {
                 toast.success('Logged out successfully');
 
                 navigate('/signin');
+                window.location.reload();
               }}
             >
               Logout

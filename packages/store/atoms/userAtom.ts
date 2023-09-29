@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 
 interface UserState {
+  userName: string;
   userEmail: string;
   isLoading: boolean;
 }
@@ -8,6 +9,7 @@ interface UserState {
 export const userState = atom<UserState>({
   key: 'userState',
   default: {
+    userName: '',
     userEmail: '',
     isLoading: false,
   },
