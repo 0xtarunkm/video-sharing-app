@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = 'http://localhost:8000/api';
@@ -11,6 +12,8 @@ const AddVideo: React.FC = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [thumbnailURL, setThumbnailURL] = useState<string>('');
   const [videoURL, setVideoURL] = useState<string>('');
+  const [isVideoLoading, setVideoIsLoading] = useState<boolean>(true);
+  const [isThumbnailLoading, setThumbnailIsLoading] = useState<boolean>(true);
 
   const navigate = useNavigate();
 
@@ -57,7 +60,8 @@ const AddVideo: React.FC = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Video uploaded');
+      toast.success('Video uploaded');
+      setVideoIsLoading(false);
     };
 
     const addThumbnail = async () => {
@@ -66,7 +70,8 @@ const AddVideo: React.FC = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log('Thumbnail uploaded');
+      toast.success('Thumbnail uploaded');
+      setThumbnailIsLoading(false);
     };
 
     if (videoFile && thumbnail) {
@@ -77,7 +82,7 @@ const AddVideo: React.FC = () => {
 
   const uploadVideo = async () => {
     try {
-      const res = await axios.post(
+      await axios.post(
         `${BASE_URL}/admin/add-video`,
         {
           title,
@@ -92,8 +97,8 @@ const AddVideo: React.FC = () => {
         }
       );
 
-      console.log(res.data);
-      navigate('/');
+      toast.success('Video added successfully');
+      navigate('/videos');
     } catch (error: any) {
       console.log(error);
     }
@@ -178,7 +183,12 @@ const AddVideo: React.FC = () => {
         />
       </div>
       <button
-        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue active:bg-blue-700"
+        className={`bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline-blue active:bg-blue-700 ${
+          isVideoLoading || isThumbnailLoading
+            ? 'cursor-not-allowed disabled:opacity-50'
+            : ''
+        }`}
+        disabled={isVideoLoading || isThumbnailLoading}
         onClick={uploadVideo}
       >
         Upload Video

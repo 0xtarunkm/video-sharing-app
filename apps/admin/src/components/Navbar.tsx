@@ -5,12 +5,12 @@ import toast from 'react-hot-toast';
 
 const navlinks = [
   {
-    title: 'ADD VIDEO',
-    path: '/add-video',
+    title: 'Videos',
+    path: '/videos',
   },
   {
-    title: 'ALL VIDEOS',
-    path: '/videos',
+    title: 'Add Video',
+    path: '/add-video',
   },
 ];
 
@@ -29,6 +29,19 @@ export default function Navbar() {
         </Link>
       </section>
 
+      {/* middle section */}
+      <section className="flex items-center space-x-10">
+        {navlinks.map((link) => (
+          <Link
+            to={link.path}
+            key={link.title}
+            className="text-gray-600 hover:text-gray-800 hover:underline"
+          >
+            {link.title}
+          </Link>
+        ))}
+      </section>
+
       {/* right section */}
       <section>
         {userEmail ? (
@@ -44,7 +57,6 @@ export default function Navbar() {
                 toast.success('Logged out successfully');
 
                 navigate('/signin');
-                window.location.reload();
               }}
             >
               Logout

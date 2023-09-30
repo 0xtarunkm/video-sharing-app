@@ -99,17 +99,6 @@ const Homepage = () => (
 export default function Home() {
   const userEmail = useRecoilValue(userEmailState);
 
-  useEffect(() => {
-    const getVideos = async () => {
-      const res = await axios.get('http://localhost:8000/api/admin/videos', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      console.log(res.data);
-    };
-    getVideos();
-  }, []);
   return (
     <div>
       {userEmail ? (

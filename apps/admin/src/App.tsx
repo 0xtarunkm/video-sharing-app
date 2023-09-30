@@ -8,6 +8,7 @@ import { useSetRecoilState } from 'recoil';
 import { userState } from 'store';
 import Home from './components/Home';
 import AddVideo from './components/AddVideo';
+import Videos from './components/Videos';
 
 const BASE_URL = 'http://localhost:8000/api';
 
@@ -72,13 +73,13 @@ function App() {
 
                 toast.success('Logged in successfully');
                 navigate('/');
-                window.location.reload();
               }}
             />
           }
         />
         <Route path="/" element={<Home />} />
         <Route path="/add-video" element={<AddVideo />} />
+        <Route path="/videos" element={<Videos />} />
       </Routes>
     </>
   );
