@@ -74,6 +74,7 @@ function App() {
 
                 toast.success('Logged in successfully');
                 navigate('/');
+                navigate(0);
               }}
             />
           }
