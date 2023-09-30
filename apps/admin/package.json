@@ -18,7 +18,8 @@
     "react-router-dom": "^6.16.0",
     "recoil": "^0.7.7",
     "store": "*",
-    "ui": "*"
+    "ui": "*",
+    "common": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
