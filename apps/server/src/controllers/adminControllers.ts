@@ -117,7 +117,7 @@ export const addVideo = async (req: Request, res: Response) => {
       },
     });
 
-    res.status(201).json({ msg: 'Video created successfully', video });
+    res.status(201).json({ msg: 'Video uploaded successfully', video });
   } catch (error: any) {
     res.status(500).json({ msg: error.message });
   }
@@ -157,11 +157,31 @@ export const deleteVideo = async (req: Request, res: Response) => {
 export const getVideos = async (req: Request, res: Response) => {
   try {
     const videos = await prisma.video.findMany({
+      where: {
+        adminId: (req as AdminRequest).adminId,
+      },
       orderBy: { createdAt: 'desc' },
       include: { admin: { select: { id: true, name: true } } },
     });
 
     res.status(200).json({ videos });
+  } catch (error: any) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const getVideo = async (req: Request, res: Response) => {
+  try {
+    const video = await prisma.video.findUnique({
+      where: { id: req.params.id },
+      include: { admin: { select: { id: true, name: true } } },
+    });
+
+    if (!video) {
+      return res.status(404).json({ msg: 'Video not found' });
+    }
+
+    res.status(200).json({ video });
   } catch (error: any) {
     res.status(500).json({ msg: error.message });
   }

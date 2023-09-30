@@ -2,6 +2,8 @@ import { PlusCircleIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { userEmailState } from 'store';
 import { useRecoilValue } from 'recoil';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 const Header = () => (
   <header className="bg-blue-500 py-12 text-white text-center">
@@ -19,7 +21,7 @@ const Feature = ({
   description: string;
   icon: React.ReactNode;
 }) => (
-  <div className="p-6 lg:w-1/3">
+  <div className="p-6 lg:w-1/3 text-center">
     <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 ">
       {icon}
     </div>
@@ -96,6 +98,18 @@ const Homepage = () => (
 
 export default function Home() {
   const userEmail = useRecoilValue(userEmailState);
+
+  useEffect(() => {
+    const getVideos = async () => {
+      const res = await axios.get('http://localhost:8000/api/admin/videos', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      console.log(res.data);
+    };
+    getVideos();
+  }, []);
   return (
     <div>
       {userEmail ? (

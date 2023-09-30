@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { userState } from 'store';
 import Home from './components/Home';
+import AddVideo from './components/AddVideo';
 
 const BASE_URL = 'http://localhost:8000/api';
 
@@ -77,6 +78,7 @@ function App() {
           }
         />
         <Route path="/" element={<Home />} />
+        <Route path="/add-video" element={<AddVideo />} />
       </Routes>
     </>
   );

@@ -21,7 +21,7 @@ export default function Navbar() {
   const navigate = useNavigate();
 
   return (
-    <nav className="flex items-center justify-between px-4 py-3 shadow-md">
+    <nav className="flex items-center justify-between px-4 py-3 shadow-md sticky top-0 bg-white">
       {/* left section */}
       <section>
         <Link to={'/'} className="text-3xl font-bold">

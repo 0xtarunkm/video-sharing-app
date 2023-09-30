@@ -1,5 +1,9 @@
 import { Request, Response } from 'express';
 import { prisma } from '../config/connectDB';
+import {
+  generateThumbnailSignedUrl,
+  generateVideoSignedUrl,
+} from '../config/S3';
 
 export const getVideo = async (req: Request, res: Response) => {
   try {
@@ -148,6 +152,24 @@ export const deleteComment = async (req: Request, res: Response) => {
     await prisma.comment.delete({ where: { id: req.params.id } });
 
     res.status(200).json({ msg: 'Comment deleted successfully' });
+  } catch (error: any) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const getVideoSignedURL = async (req: Request, res: Response) => {
+  try {
+    const signedURL = await generateVideoSignedUrl();
+    res.status(200).json({ signedURL });
+  } catch (error: any) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+export const getThumbnailSignedURL = async (req: Request, res: Response) => {
+  try {
+    const signedURL = await generateThumbnailSignedUrl();
+    res.status(200).json({ signedURL });
   } catch (error: any) {
     res.status(500).json({ msg: error.message });
   }

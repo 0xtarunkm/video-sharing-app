@@ -5,11 +5,16 @@ import {
   deleteComment,
   getAllComments,
   getAllVideos,
+  getThumbnailSignedURL,
   getVideo,
   getVideoLikes,
+  getVideoSignedURL,
   likeVideo,
 } from '../controllers/videoControllers';
 const router = express.Router();
+
+router.get('/get-video-signed-url', getVideoSignedURL);
+router.get('/get-thumbnail-signed-url', getThumbnailSignedURL);
 
 router.get('/:id', protectUser, getVideo);
 router.get('/', protectUser, getAllVideos);
