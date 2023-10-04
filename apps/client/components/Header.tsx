@@ -17,7 +17,7 @@ export default function Header() {
 
   const router = useRouter();
   return (
-    <div className="flex items-center justify-between border-gray-350 border-b-[1px] py-2 sm:py-3 px-2">
+    <div className="flex items-center justify-between border-gray-350 border-b-[1px] py-2 sm:py-3 px-2 sticky top-0 bg-gray-950 z-20">
       {/* Left section */}
       <section className="flex items-center gap-x-4">
         <Bars3Icon

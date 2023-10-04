@@ -13,7 +13,7 @@ export default function Sidebar() {
   const router = useRouter();
 
   return (
-    <div className="md:flex md:flex-col w-48 h-[calc(100vh-70px)] overflow-y-auto hidden">
+    <div className="md:flex md:flex-col w-[350px] h-[calc(100vh-70px)] overflow-y-auto hidden sticky left-0">
       {/* top section */}
       <section className="flex flex-col items-center justify-center gap-y-4 py-4 mb-auto">
         <div className="sidebar-btn">

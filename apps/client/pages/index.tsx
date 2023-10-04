@@ -11,7 +11,7 @@ export default function Home({ videos }: { videos: Videos[] }) {
   const sidebarOpen = useRecoilValue(sidebarState);
 
   return (
-    <main className="bg-gray-950 text-white h-screen">
+    <main className="bg-gray-950 text-white h-screen overflow-y-hidden">
       <Header />
       <div className="flex">
         {sidebarOpen.isOpen && <Sidebar />}

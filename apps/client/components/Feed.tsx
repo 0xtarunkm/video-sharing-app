@@ -10,9 +10,9 @@ export default function Feed({ videos }: { videos: Videos[] }) {
 
   return (
     <div
-      className={`${
+      className={`grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-3 xl:grid-cols-3 overflow-y-scroll h-screen px-4 pb-24 py-2 ${
         sidebarOpen.isOpen && 'opacity-40'
-      } "grid md:grid-cols-2 sm:grid-cols-1 lg:grid-cols-4`}
+      } `}
     >
       {videos.map((video) => (
         <VideoCard key={video.id} video={video} />

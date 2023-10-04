@@ -36,8 +36,8 @@ export const VideosObject = z.object({
   id: z.string(),
   title: z.string(),
   description: z.string(),
-  videoUrl: z.string(),
-  thumbnailUrl: z.string(),
+  url: z.string(),
+  thumbnail: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
   admin: z.object({
