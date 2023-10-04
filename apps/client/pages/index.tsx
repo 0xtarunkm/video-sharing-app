@@ -13,7 +13,7 @@ export default function Home({ videos }: { videos: Videos[] }) {
   return (
     <main className="bg-gray-950 text-white h-screen overflow-y-hidden">
       <Header />
-      <div className="flex">
+      <div className="">
         {sidebarOpen.isOpen && <Sidebar />}
         <Feed videos={videos} />
       </div>

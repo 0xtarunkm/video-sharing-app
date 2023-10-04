@@ -24,7 +24,6 @@ export default function VideoDetails() {
     );
 
     setVideo(res.data.video);
-    console.log(res.data.video);
   };
 
   useEffect(() => {
@@ -33,18 +32,18 @@ export default function VideoDetails() {
 
   return (
     <div className="text-center p-8">
-      <div className="border-2 border-black rounded-md w-fit mx-auto">
+      <div className="rounded-md w-fit mx-auto">
         <video
           src={video.url}
           controls
           width={750}
-          className="rounded-md"
+          className="rounded-md shadow-md shadow-gray-900"
         ></video>
       </div>
       {/* video details */}
-      <div>
+      <div className="mt-4">
         <h1 className="text-2xl font-bold">{video.title}</h1>
-        <p className="text-lg ">{video.description}</p>
+        <p className="text-gray-700 text-sm">{video.description}</p>
       </div>
     </div>
   );

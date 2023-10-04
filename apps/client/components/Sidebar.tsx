@@ -13,14 +13,14 @@ export default function Sidebar() {
   const router = useRouter();
 
   return (
-    <div className="md:flex md:flex-col w-[350px] h-[calc(100vh-70px)] overflow-y-auto hidden sticky left-0">
+    <div className="md:flex md:flex-col w-[280px] h-[calc(100vh-60px)] overflow-y-auto hidden fixed left-0 bg-gray-950 z-20">
       {/* top section */}
       <section className="flex flex-col items-center justify-center gap-y-4 py-4 mb-auto">
-        <div className="sidebar-btn">
+        <div className="sidebar-btn" onClick={() => router.push('/')}>
           <HomeIcon className="h-6" />
           <span>Home</span>
         </div>
-        <div className="sidebar-btn">
+        <div className="sidebar-btn" onClick={() => router.push('/')}>
           <VideoCameraIcon className="h-6" />
           <span>Videos</span>
         </div>
@@ -35,7 +35,7 @@ export default function Sidebar() {
             </button>
           </section>
         ) : (
-          <section className="flex items-center space-x-3">
+          <section className="flex items-center justify-between px-4">
             <Image
               src={session?.user?.image!}
               alt="profile"

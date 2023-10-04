@@ -18,10 +18,10 @@ export const MediaCard = ({
     <Card sx={{ maxWidth: 420 }}>
       <CardMedia sx={{ height: 220 }} image={thumbnail} title={title} />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" noWrap>
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" noWrap>
           {description}
         </Typography>
       </CardContent>

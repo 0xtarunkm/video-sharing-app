@@ -19,7 +19,7 @@ export default function VideoCard({ video }: { video: Videos }) {
       {/* bottom section */}
       <section className="my-2">
         <h3 className="font-semibold mb-2">{video.title}</h3>
-        <p className="text-sm text-gray-500">{video.description}</p>
+        <p className="text-sm text-gray-500 truncate">{video.description}</p>
       </section>
     </div>
   );

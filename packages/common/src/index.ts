@@ -26,8 +26,8 @@ export const VideoInput = z.object({
   description: z
     .string()
     .min(2, { message: 'Description must be at least 2 characters long' }),
-  videoUrl: z.string().url({ message: 'Please provide a valid URL' }),
-  thumbnailUrl: z.string().url({ message: 'Please provide a valid URL' }),
+  url: z.string().url({ message: 'Please provide a valid URL' }),
+  thumbnail: z.string().url({ message: 'Please provide a valid URL' }),
   createdAt: z.date().optional(),
   updatedAt: z.date().optional(),
 });
