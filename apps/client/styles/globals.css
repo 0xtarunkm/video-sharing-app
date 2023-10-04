@@ -4,6 +4,9 @@
 
 @layer components {
   .btn {
-    @apply bg-blue-500 text-white font-bold md:py-2 md:px-4 py-1 px-2 rounded border-2 border-blue-500 hover:border-2 hover:border-black hover:bg-white hover:text-black duration-300;
+    @apply flex items-center gap-2 border-white border-[1px] rounded-full px-3 font-semibold py-1 hover:bg-white hover:text-black duration-300 ease-in-out;
+  }
+  .sidebar-btn {
+    @apply flex items-center space-x-4 px-3 py-2 hover:bg-gray-900 w-full rounded-md duration-200 ease-in-out cursor-pointer;
   }
 }

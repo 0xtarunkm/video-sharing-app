@@ -32,6 +32,25 @@ export const VideoInput = z.object({
   updatedAt: z.date().optional(),
 });
 
+export const VideosObject = z.object({
+  id: z.string(),
+  title: z.string(),
+  description: z.string(),
+  videoUrl: z.string(),
+  thumbnailUrl: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+  admin: z.object({
+    id: z.string(),
+    name: z.string(),
+    email: z.string(),
+    password: z.string(),
+    createdAt: z.date(),
+    updatedAt: z.date(),
+  }),
+});
+
 export type userSignupInputType = z.infer<typeof SignupInput>;
 export type userLoginInputType = z.infer<typeof LoginInput>;
 export type videoInputType = z.infer<typeof VideoInput>;
+export type Videos = z.infer<typeof VideosObject>;
