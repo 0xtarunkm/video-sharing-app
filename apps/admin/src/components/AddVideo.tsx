@@ -53,6 +53,8 @@ const AddVideo: React.FC = () => {
     getSignedURLs();
   }, []);
 
+  console.log(thumbnailURL, videoURL);
+
   useEffect(() => {
     const addVideo = async () => {
       await axios.put(videoURL!, videoFile!, {

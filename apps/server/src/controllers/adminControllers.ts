@@ -105,14 +105,14 @@ export const addVideo = async (req: Request, res: Response) => {
       return res.status(400).json({ msg: parsedInput.error });
     }
 
-    const { title, description, videoUrl, thumbnailUrl } = parsedInput.data;
+    const { title, description, url, thumbnail } = parsedInput.data;
 
     const video = await prisma.video.create({
       data: {
         title,
         description,
-        url: videoUrl,
-        thumbnail: thumbnailUrl,
+        url,
+        thumbnail,
         admin: { connect: { id: (req as AdminRequest).adminId } },
       },
     });
@@ -131,11 +131,11 @@ export const updateVideo = async (req: Request, res: Response) => {
       return res.status(400).json({ msg: parsedInput.error });
     }
 
-    const { title, description, videoUrl, thumbnailUrl } = parsedInput.data;
+    const { title, description, url, thumbnail } = parsedInput.data;
 
     const video = await prisma.video.update({
       where: { id: req.params.id },
-      data: { title, description, url: videoUrl, thumbnail: thumbnailUrl },
+      data: { title, description, url, thumbnail },
     });
 
     res.status(200).json({ msg: 'Video updated successfully', video });

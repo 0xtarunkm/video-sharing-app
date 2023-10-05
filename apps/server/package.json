@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "esbuild ./src/index.ts --bundle --platform=node --outdir=dist/",
-    "start": "node dist/index.js"
+    "build": "esbuild ./src/index.ts --bundle --platform=node --outdir=build/",
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
