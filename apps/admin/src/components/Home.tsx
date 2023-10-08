@@ -2,8 +2,6 @@ import { PlusCircleIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
 import { userEmailState } from 'store';
 import { useRecoilValue } from 'recoil';
-import { useEffect } from 'react';
-import axios from 'axios';
 
 const Header = () => (
   <header className="bg-blue-500 py-12 text-white text-center">

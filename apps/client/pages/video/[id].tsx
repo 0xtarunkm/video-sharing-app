@@ -7,7 +7,7 @@ import { GetServerSideProps } from 'next';
 import axios from 'axios';
 import { videoInputType } from 'common';
 
-export default function video({ video }: { video: videoInputType }) {
+export default function VideoComponent({ video }: { video: videoInputType }) {
   const sidebarOpen = useRecoilValue(sidebarState);
 
   return (
