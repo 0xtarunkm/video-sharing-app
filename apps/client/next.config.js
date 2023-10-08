@@ -6,6 +6,7 @@ const nextConfig = {
     domains: [
       'avatars.githubusercontent.com',
       'tarunkm-video-sharing-app-thumbnail.s3.amazonaws.com',
+      'lh3.googleusercontent.com',
     ],
   },
 };
