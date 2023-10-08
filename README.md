@@ -30,7 +30,7 @@ Before running the app, make sure you have the following installed:
 
 1. Clone the repository:
 
-   ```bash
+   ```
    git clone https://github.com/tarunclub/video-sharing-app.git
    cd video-sharing-app
    ```
