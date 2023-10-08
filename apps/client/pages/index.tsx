@@ -6,17 +6,25 @@ import { GetServerSideProps } from 'next';
 import { useRecoilValue } from 'recoil';
 import axios from 'axios';
 import { Videos } from 'common';
+import { useSession } from 'next-auth/react';
 
 export default function Home({ videos }: { videos: Videos[] }) {
   const sidebarOpen = useRecoilValue(sidebarState);
+  const { data: session } = useSession();
 
   return (
     <main className="bg-gray-950 text-white h-screen overflow-y-hidden">
       <Header />
-      <div className="">
-        {sidebarOpen.isOpen && <Sidebar />}
-        <Feed videos={videos} />
-      </div>
+      {session ? (
+        <div className="">
+          {sidebarOpen.isOpen && <Sidebar />}
+          <Feed videos={videos} />
+        </div>
+      ) : (
+        <div className="flex justify-center items-center h-full">
+          <h1 className="text-4xl font-bold">Please sign in</h1>
+        </div>
+      )}
     </main>
   );
 }
